@@ -1,25 +1,26 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { HashRouter, Route, Redirect } from 'react-router-dom';
+import Navigation from './components/Navigation';
+import Pokemons from './views/Pokemons';
+import PokemonTypes from './views/PokemonTypes';
+import Favourites from './views/Favourites';
+import Pokemon from './views/Pokemon';
+import PokemonType from './views/PokemonType';
+import './App.scss';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <HashRouter>
+      <Navigation />
+      <Route exact path="/">
+        <Redirect to="/pokemons?page=1" />
+      </Route>
+      <Route path="/pokemons" component={Pokemons} />
+      <Route path="/types" component={PokemonTypes} />
+      <Route path="/favourites" component={Favourites} />
+      <Route path="/pokemon/:id" component={Pokemon} />
+      <Route path="/type/:id" component={PokemonType} />
+    </HashRouter>
   );
 }
 
